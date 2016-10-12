@@ -4,5 +4,5 @@
 define("HOST", 'localhost');
 
 define("DBvieja", 'contrataciones');
-define("USRDBvieja", 'root');
-define("PASSDBvieja", 's20s05');
+define("USRDBvieja", 'usuario');
+define("PASSDBvieja", 'password');
