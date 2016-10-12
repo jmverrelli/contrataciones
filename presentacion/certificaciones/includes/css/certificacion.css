@@ -1,0 +1,50 @@
+.labelForm{
+		display: inline-block;
+		width: 140px;
+		text-align: right;
+		margin-right: 0.5em;
+	}
+
+.block{
+		padding: 1%;
+	}
+
+.padd {
+
+	padding: 2%;
+	width: auto;
+}
+
+.border{
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.border td{
+	text-align: center;
+}
+
+.border tr:nth-child(even){background-color: #f2f2f2}
+
+.border th {
+    background-color: #2a2b30;
+    color: white;
+    text-align: center;
+}
+
+.totalTotal{
+	border-top: solid 0.2px black;
+}
+
+.textTotal{
+	text-align: right;
+}
+
+.righted{
+	text-align: right !important;
+}
+
+.field{
+	width: 100%;
+	padding: 1%;
+}

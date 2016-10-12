@@ -1,0 +1,5 @@
+la tabla prestaciones no usa el iddetallecertificacion
+la tabla modulado parece no usarse, tampoco usan los modulados dentro del sistema en si
+la tabla fecha de elevacion parece no usarse hasta las certificaciones al menos
+la tabla detalle de elevacion tampoco le encuentro utilidad
+la tabla certificaciones no usa los campos IdModulado, Horas y Por Monto
