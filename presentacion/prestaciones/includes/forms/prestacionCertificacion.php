@@ -15,7 +15,7 @@ $certificacion = $dbCert->traerCertificacion($ultimaCertificacion);
 
 if($detallesCertificacion == false){
 
-	$detalles = "Esta Certificacion no tiene detalles.";
+	$detalles = "Esta Certificacion no tiene detalles aun.";
 }
 
 ?>

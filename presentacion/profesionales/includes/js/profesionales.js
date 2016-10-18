@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     $('#agregarProfesional').click(function(event){
-    	event.preventDefault();
+    	event.preventDefault(event);
     		$.ajax({
 	            data: $('#agregarProfesionalForm').serialize(),
 	            type: "POST",

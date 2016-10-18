@@ -2,8 +2,8 @@ $(document).ready(function(){
 
 
     $('#nuevaCertificacion').click(function(event){
-        event.preventDefault();
-
+        event.preventDefault(event);
+        $("#nuevaCertificacion").off('click');
          $("#dialog:ui-dialog").dialog( "destroy" );
             $("#dialogNuevaCertificacion").css('visibility',"visible");
             $("#dialogNuevaCertificacion").load("presentacion/certificaciones/includes/forms/nuevaCertificacion.php",function() 
@@ -122,7 +122,7 @@ function traerDetalles(IdCertificacion){
                     	text += total.toFixed(2);
                     	text += "</td>";
                     	text += "<td>";
-                    	text += "<input type='image' width='18px' height='18px' src='presentacion/includes/images/trash.png' onclick='eliminarDetalle(" + data.detalles[valor].IddetalleCertificacion + ");' />";
+                    	text += "<input type='image' width='18px' height='18px' src='presentacion/includes/images/trash.png' onclick='eliminarDetalle(event, " + data.detalles[valor].IddetalleCertificacion + ");' />";
                     	text += "</td>";
                     	text += "</tr>";
                     	resultado += total; 
@@ -139,9 +139,9 @@ function traerDetalles(IdCertificacion){
 
 }
 
-function eliminarDetalle(IddetalleCertificacion){
+function eliminarDetalle(event, IddetalleCertificacion){
 
-	event.preventDefault();
+	event.preventDefault(event);
 	if(confirm("¿Seguro que desea eliminar el detalle?"))
 	{
 		$.ajax({

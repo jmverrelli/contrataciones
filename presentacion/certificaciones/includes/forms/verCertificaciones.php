@@ -1,5 +1,25 @@
 <!-- por aca hay que ver que se dibuje -->
+<style type="text/css">
+    
+.btnin {
+    background: #1c1d22;
+    color: #fff;
+    font-family: Sans-serif;
+    font-size: 20px;
+    height: 60px;
+    width: 200px;
+    line-height: 60px;
+    margin: 25px 25px;
+    text-align: center;
+    border: 0;
+    transition: all 0.3s ease 0s;
+}
 
+.btnin:hover {
+  background: #CF4647;
+}
+
+</style>
 <h1 class="centered">Certificaciones</h1>
 
 <div class="centered">
@@ -13,7 +33,7 @@
             url:'presentacion/certificaciones/includes/ajaxFunctions/MostrarCertificaciones.php', 
             mtype: "POST",
             datatype: "json",
-            colNames:['IdCertificacion','Fecha','IdModulado','IdProfesionales','IdHospital','FechaInicio','FechaFinal','Horas','PorMonto',''],
+            colNames:['IdCertificacion','Fecha','IdModulado','IdProfesionales','IdHospital','FechaInicio','FechaFinal',''],
             colModel:[ 
                 {name:'IdCertificacion', index:'cer.IdCertificacion',width:'100%',align:"left",fixed:true,editable:false},
                 {name:'Fecha', index:'cer.Fecha',width:'100%',align:"left",fixed:true,editable:true},
@@ -22,8 +42,6 @@
                 {name:'IdHospital', index:'cer.IdHospital',width:'100%',align:"left",fixed:true,editable:true},
                 {name:'FechaInicio', index:'cer.FechaInicio',width:'100%',align:"left",fixed:true,editable:true},
                 {name:'FechaFinal', index:'cer.FechaFinal',width:'100%',align:"left",fixed:true,editable:true},
-                {name:'Horas', index:'cer.Horas',width:'100%',align:"left",fixed:true,editable:true},
-                {name:'PorMonto', index:'cer.PorMonto',width:'100%',align:"left",fixed:true,editable:true},
                 {name: 'myac', width: '40%', fixed: true, sortable: false, resize: false/*, formatter: 'actions'*/, search: false}
             ],
             rowNum:true,
@@ -70,8 +88,9 @@
     <div id="cuadro" align="center" >
         <table id="jgVerCertificaciones"></table>
         <div id="jqCertificacionesfoot"></div>
+         <input class="btnin" type="submit" value="Nueva Certificacion" id="nuevaCertificacion">
     </div>
     <div id="dialogNuevaCertificacion" name="dialogNuevaCertificacion"></div>
     <div id="dialogAgregarPrestaciones" name="dialogAgregarPrestaciones"></div>
     <div id="dialogVistaCertificacion" name="dialogVistaCertificacion"></div>
-    <input class="button-secondary" type="submit" value="Nueva Certificacion" id="nuevaCertificacion">
+   

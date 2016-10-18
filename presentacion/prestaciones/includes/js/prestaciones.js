@@ -8,7 +8,7 @@ function traerValor(){
           	{
           		if(data == false){
           			
-          			alert("Hubo un error encontrando el valor para esta prestacion.");
+          			//alert("Hubo un error encontrando el valor para esta prestacion.");
           		}
           		else{
           			$("#valor").val(data);
@@ -29,7 +29,7 @@ function calculartotal(){ //TODO VALIDAR EL INGRESO DE LOS DETALLES
 $(document).ready(function(){
 
     $('#agregarPrestacion').click(function(event){
-    	event.preventDefault();
+    	event.preventDefault(event);
     		$.ajax({
 	            data: $('#nuevaPrestacion').serialize(),
 	            type: "POST",
@@ -39,10 +39,12 @@ $(document).ready(function(){
 	            {
 	                if(data.ret == false){
 	                    alert(data.message);
+	                    $('#prestacion').focus();
 	                }
 	                else{
 	                    
 	                    alert(data.message);
+	                    $('#prestacion').focus();
 	                }
 	            }
 	        });
@@ -56,7 +58,7 @@ $(document).ready(function(){
 
 
 	 $('#agregarNuevaPrestacionBtn').click(function(event){
-    	event.preventDefault();
+    	event.preventDefault(event);
     		$.ajax({
 	            data: $('#agregarNuevaPrestacionForm').serialize(),
 	            type: "POST",

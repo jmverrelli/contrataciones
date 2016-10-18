@@ -19,6 +19,11 @@ $certificacion = $dbCert->traerCertificacion($idCertificacion);
 $profesional = $dbprof->traerProfesional($certificacion->IdProfesionales);
 $destino = $dbdest->traerDestino($idCertificacion);
 
+if (($timestamp = strtotime($certificacion->FechaFinal)) !== false)
+{
+  $php_date = getdate($timestamp);
+}
+
 ?>
 
 <style type="text/css">
@@ -92,7 +97,7 @@ $destino = $dbdest->traerDestino($idCertificacion);
 		</div>
 		<div class="parra">
 			<span>Sr. Director.
-			Me dirijo a usted a los efectos de informar que durante el periodo correspondiente al mes de {{mes}} del año {{año}} he procedido a cumplimentar las siguentes prestaciones conforme se establecio en el convenio de locacion de obra que suscripto como <b><?php echo $profesional['Especialidad']; ?></b> con la Municipalidad de Malvinas Argentinas (contrato <b><?php echo $profesional['Nro Convenio']; ?></b>).</span>
+			Me dirijo a usted a los efectos de informar que durante el periodo correspondiente al mes <?php echo $php_date['mon']; ?> del año <?php echo $php_date['year']; ?> he procedido a cumplimentar las siguentes prestaciones conforme se establecio en el convenio de locacion de obra que suscripto como <b><?php echo $profesional['Especialidad']; ?></b> con la Municipalidad de Malvinas Argentinas (contrato <b><?php echo $profesional['Nro Convenio']; ?></b>).</span>
 
 		</div>
 

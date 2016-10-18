@@ -23,6 +23,7 @@
 	<link rel="stylesheet" type="text/css" href="presentacion/includes/js/jQuery/jquery-ui.theme.min.css" />
 	<script src="presentacion/includes/js/jQuery/jquery1-12.js"></script>
 	<script src="presentacion/includes/js/jQuery/jquery-ui.min.js"></script>
+	<script src="presentacion/includes/js/timePicker/jquery.timepicker.min.js"></script>
 	<!-- JQGrid -->
 	<link rel="stylesheet" type="text/css" href="presentacion/includes/js/jQGrid/css/ui.jqgrid-bootstrap-ui.css" />
 	<link rel="stylesheet" type="text/css" href="presentacion/includes/js/jQGrid/css/ui.jqgrid-bootstrap.css" />
@@ -176,6 +177,12 @@
 
 				case 'Listar Prestaciones':
 					$("#loaded_content").load("presentacion/prestaciones/includes/forms/verPrestaciones.php");
+				break;
+
+				case 'Todos':
+
+				location.reload();
+
 				break;
 
 				default: 

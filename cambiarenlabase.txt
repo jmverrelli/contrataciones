@@ -1,3 +1,15 @@
+para hacer la conexion a la base, agregar un archivo en data/conexion/conectionData.php que tenga:
+
+<?php
+define("HOST", 'localhost o donde este la base');
+
+define("DBvieja", 'contrataciones');
+define("USRDBvieja", 'usuario base');
+define("PASSDBvieja", 'contraseña base');
+
+
+---------------------------------------------------------
+
 la tabla prestaciones no usa el iddetallecertificacion
 la tabla modulado parece no usarse, tampoco usan los modulados dentro del sistema en si
 la tabla fecha de elevacion parece no usarse hasta las certificaciones al menos

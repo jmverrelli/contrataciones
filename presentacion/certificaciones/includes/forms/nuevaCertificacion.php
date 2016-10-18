@@ -30,7 +30,13 @@ $destinosSelect = $dbDestinos->getDestinosSelect();
 
 <link rel="stylesheet" type="text/css" href="presentacion/includes/js/timePicker/jquery.timepicker.css" />
 <link rel="stylesheet" type="text/css" href="presentacion/certificaciones/includes/css/certificacion.css" />
-<script src="presentacion/includes/js/timePicker/jquery.timepicker.min.js"></script>
+
+<script type="text/javascript">
+	$("#periodoDe").on('click');
+ 	$('#periodoDe').datepicker({ dateFormat: 'yy-mm-dd' });
+
+	$('#periodoHasta').datepicker({ dateFormat: 'yy-mm-dd' });
+</script>
 <script src="presentacion/certificaciones/includes/js/certificaciones.js"></script>
 
 <form id="nuevaCertificacionForm" name="nuevaCertificacionForm">
@@ -65,9 +71,3 @@ $destinosSelect = $dbDestinos->getDestinosSelect();
 	</div>
 	<input type="hidden" name="idUsuario" id="idUsuario" value=<?php echo '"'.$data->id.'"'; ?>/>
 </form>
-
-<script type="text/javascript">
- $('#periodoDe').datepicker({ dateFormat: 'yy-mm-dd' });
-
- $('#periodoHasta').datepicker({ dateFormat: 'yy-mm-dd' });
-</script>

@@ -15,7 +15,7 @@ class DetalleCertificacionesDataBaseLinker
 
 	function traerDetallesCertificacion($idCertificacion){
 
-		$query = "SELECT dc.*, pres.Prestacion FROM `Detalle de Certificacion` dc LEFT JOIN Prestaciones pres on (dc.IdPrestacion = pres.IdPrestacion) WHERE dc.IdCertificacion = $idCertificacion;";
+		$query = "SELECT dc.*, pres.Prestacion FROM `Detalle de Certificacion` dc LEFT JOIN Prestaciones pres on (dc.IdPrestacion = pres.IdPrestacion) WHERE dc.IdCertificacion = $idCertificacion AND dc.habilitado = 1;";
 
         try {
 
