@@ -14,7 +14,7 @@ class ProfesionalesDataBaseLinker
 
 	function getProfesionalesSelect(){
 
-		$query="SELECT IdProfesional, `Apellido y Nombre` FROM Profesionales WHERE habilitado = 1;";
+		$query="SELECT IdProfesional, `Apellido y Nombre` FROM Profesionales WHERE habilitado = 1 ORDER BY `Apellido y Nombre` ASC;";
 
         try {
 
@@ -73,14 +73,16 @@ class ProfesionalesDataBaseLinker
         $apellido = strtoupper($data['apellido']);
         $nombre = strtoupper($data['nombre']);
 
+        $query = "INSERT INTO Profesionales (`Apellido y Nombre`, `Nro Convenio`, `Nro Proveedor`, Telefono) VALUES ('".$apellido." ".$nombre."',".$data['nroConvenio'].", ".$data['nroProveedor'].", '".$data['telefono']."');";
 
-        $query = "INSERT INTO Profesionales (`Apellido y Nombre`, Especialidad, `Nro Convenio`, `Nro Proveedor`, Telefono) VALUES ('".$apellido." ".$nombre."', '".$data['especialidad']."', ".$data['nroConvenio'].", ".$data['nroProveedor'].", '".$data['telefono']."');";
+
 
         $response = new stdClass();
         try
         {   
             $this->dbprof->conectar();
             $this->dbprof->ejecutarAccion($query);
+            $last_id = $this->dbprof->lastInsertId();
         }
         catch (Exception $e)
         {
@@ -91,6 +93,18 @@ class ProfesionalesDataBaseLinker
         }
 
         $this->dbprof->desconectar();
+
+        $arrayvinculo = array();
+        $arrayvinculo['VincularProfesional'] = $last_id;
+        $arrayvinculo['VincularEspecialidad'] = $data['especialidad'];
+
+        $vinculo = $this->agregarVinculoEspecialidad($arrayvinculo);
+
+        if($vinculo->ret == false){
+            $response->message = "Error al ingresar especialidad";
+            $response->ret = true;
+            return $response;   
+        }
 
         $response->message = "El registro se ingreso correctamente";
         $response->ret = true;
@@ -121,7 +135,6 @@ class ProfesionalesDataBaseLinker
             $row = array();
             $row[] = $certificacion['IdProfesional'];
             $row[] = $certificacion['Apellido y Nombre'];
-            $row[] = $certificacion['Especialidad'];
             $row[] = $certificacion['Nro Convenio'];
             $row[] = $certificacion['Nro Proveedor'];
             $row[] = $certificacion['Telefono'];
@@ -132,7 +145,6 @@ class ProfesionalesDataBaseLinker
 
         $response->userdata['IdProfesional']= 'IdProfesional';
         $response->userdata['Apellido y Nombre']= 'Apellido y Nombre';
-        $response->userdata['Especialidad']= 'Especialidad';
         $response->userdata['Nro Conevnio']= 'Nro Conevnio';
         $response->userdata['Nro Proveedor']= 'Nro Proveedor';
         $response->userdata['Telefono']= 'Telefono';
@@ -162,7 +174,6 @@ class ProfesionalesDataBaseLinker
         $query="SELECT
                     pro.IdProfesional,
                     pro.`Apellido y Nombre`,
-                    pro.Especialidad,
                     pro.`Nro Convenio`,
                     pro.`Nro Proveedor`,
                     pro.Telefono
@@ -228,5 +239,124 @@ class ProfesionalesDataBaseLinker
         return $response;
     }
 
+    function traerEspecialidades($id){
+
+        $response = new stdClass();
+
+        $especialidades = array();
+
+        $query2 = "SELECT esp.IdEspecialidad as IdEspecialidad, esp.Especialidad as Especialidad FROM Profesional_Especialidad pe LEFT JOIN Especialidades esp on (pe.IdEspecialidad = esp.IdEspecialidad) WHERE pe.IdProfesional = $id and pe.habilitado = 1;";
+        
+      try { 
+            $this->dbprof->conectar();
+            $this->dbprof->ejecutarQuery($query2);
+            
+        } catch (Exception $e) {
+            $this->dbprof->desconectar();
+            $response->ret = false;
+            $response->message = "Error ejecutando la consulta";
+        }
+
+
+        for ($i = 0; $i < $this->dbprof->querySize; $i++)
+        {
+            $especi = $this->dbprof->fetchRow($query2);
+            $especialidades[] = $especi;
+        }
+
+        if(count($especialidades) == 0){
+            $response->ret = false;
+            $response->message = "No tiene especialidades";
+            $this->dbprof->desconectar();
+            return $response;
+        }
+
+        $response->ret = true;
+        $response->message = "Especialidades";
+        $response->especialidadesProfesional = $especialidades;
+
+        $this->dbprof->desconectar();
+
+        return $response;
+    }
+
+    function agregarVinculoEspecialidad($data){
+
+        $response = new stdClass();
+
+        $existeVinculo = $this->existeVinculo($data);
+
+        if($existeVinculo->ret == true) //existe un vinculo, no se hace
+        {
+            $response->ret = false;
+            $response->message = "Ya existe el vinculo entre el profesional y la especialidad.";
+            return $response;
+        }
+
+        $query = "INSERT INTO Profesional_Especialidad (IdProfesional, IdEspecialidad) VALUES (".$data['VincularProfesional'].", ".$data['VincularEspecialidad'].");";
+
+       
+        try
+        {   
+            $this->dbprof->conectar();
+            $this->dbprof->ejecutarAccion($query);
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Error al conectar con la base de datos", 17052013);
+            $response->message = "Error al ingresar el registro";
+            $response->ret = false;
+            return $response;
+        }
+
+        $this->dbprof->desconectar();
+
+        $response->message = "El registro se ingreso correctamente";
+        $response->ret = true;
+
+        return $response;   
+    }
+
+    function existeVinculo($data){
+
+        
+        $response = new stdClass();
+
+        $query = "SELECT * FROM Profesional_Especialidad WHERE IdProfesional = ".$data['VincularProfesional']." and IdEspecialidad = ".$data['VincularEspecialidad'].";";
+
+        
+        try { 
+            $this->dbprof->conectar();
+            $this->dbprof->ejecutarQuery($query);
+            
+        } catch (Exception $e) {
+            $this->dbprof->desconectar();
+            $response->ret = false;
+            $response->message = "Error ejecutando la consulta";
+        }
+
+        $especialidades = array();
+
+        for ($i = 0; $i < $this->dbprof->querySize; $i++)
+        {
+            $especi = $this->dbprof->fetchRow($query);
+            $especialidades[] = $especi;
+        }
+
+        if(count($especialidades) == 0){
+            $response->ret = false;
+            $response->message = "No existe la vinculacion.";
+            $this->dbprof->desconectar();
+            return $response;
+        }
+
+        $response->ret = true;
+        $response->message = "Ya existe la relacion de este profesional con esta especialidad.";
+
+        $this->dbprof->desconectar();
+
+        return $response;
+
+    }
 
 }

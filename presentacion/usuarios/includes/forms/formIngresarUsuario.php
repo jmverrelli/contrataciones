@@ -1,6 +1,5 @@
 <?php
-include_once '/home/web/namespacesAdress.php';
-include_once nspcUsuario.'usuarioDatabaseLinker.class.php';
+include_once '../../../../data/usuario/usuarioDatabaseLinker.class.php';
 
 session_start();
 

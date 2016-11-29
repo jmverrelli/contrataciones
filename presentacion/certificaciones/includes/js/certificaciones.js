@@ -3,7 +3,8 @@ $(document).ready(function(){
 
     $('#nuevaCertificacion').click(function(event){
         event.preventDefault(event);
-        $("#nuevaCertificacion").off('click');
+        //$("#nuevaCertificacion").off('click');
+         $("#dialog:ui-dialog").dialog( "close" );
          $("#dialog:ui-dialog").dialog( "destroy" );
             $("#dialogNuevaCertificacion").css('visibility',"visible");
             $("#dialogNuevaCertificacion").load("presentacion/certificaciones/includes/forms/nuevaCertificacion.php",function() 
@@ -13,14 +14,20 @@ $(document).ready(function(){
                     modal: true,
                     resizable : true,
                     width: 800,
+                    open: function (type, data) {
+                        var form = $("#formParentCert");
+                    $(this).parent().appendTo(form);
+                },
                     buttons:
                             {
                                 "Agregar Certificacion":function()
                                 {
+
                                     if(!validar()){
-                                    	alert("Debe seleccionar fechas de periodo.");
-                                    	return;
+                                        alert("Debe seleccionar fechas de periodo.");
+                                        return;
                                     }
+
                                     $.ajax({
                                         data: $('#nuevaCertificacionForm').serialize(),
                                         type: "POST",
@@ -39,12 +46,15 @@ $(document).ready(function(){
                                                 $(this).dialog("close");
                                                 agregarPrestaciones(data.lastId);
                                             }
+
+                                            $('#jgVerCertificaciones').trigger( 'reloadGrid' );
                                         }
                                     });
                                 },
                                 "Cerrar":function()
                                 {
                                     $(this).dialog("close");
+                                
                                 }
                             }
                 });
@@ -54,6 +64,34 @@ $(document).ready(function(){
     });
 
 });
+
+
+function traerEspecialidades(){
+    var e = document.getElementById("Profesional");
+    var idProfesional = e.options[e.selectedIndex].value; 
+     $.ajax({
+            data: {idProfesional : idProfesional},
+            type: "POST",
+            dataType: "json",
+            url: "presentacion/profesionales/includes/ajaxFunctions/TraerEspecialidades.php",
+            success: function(data)
+            {
+                if(data.ret == false){
+                   
+                }
+                else{
+                    
+                    var select = $('#EspecialidadCer');
+                    select.empty();
+                    for (var i = 0; i < data.especialidadesProfesional.length ; i++) {
+                        select.append('<option value="'+data.especialidadesProfesional[i].IdEspecialidad+'">'+data.especialidadesProfesional[i].Especialidad+'</option>');
+                        
+                    }
+                    
+                }
+            }
+        });
+}
 
 function agregarPrestaciones(id){
 
@@ -208,3 +246,4 @@ function loadOtherPage(id) {
     });             
 
 }
+

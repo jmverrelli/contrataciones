@@ -57,7 +57,8 @@
 		// show breadcrumbs
 		breadcrumbsCtrl : true,
 		// initial breadcrumb text
-		initialBreadcrumb : '<span onClick="location.reload();" >Todos</span>',
+		//initialBreadcrumb : '<span onClick="location.reload();" >Todos</span>',
+		initialBreadcrumb : '<span>Todos</span>',
 		// show back button
 		backCtrl : true,
 		// delay between each menu item sliding animation

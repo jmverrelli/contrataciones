@@ -92,7 +92,7 @@ class CertificacionesDataBaseLinker
                 FROM 
                     Certificaciones cer
                 WHERE
-                    cer.IdCertificacion IS NOT NULL ".$where." ".$sort;
+                    cer.IdCertificacion IS NOT NULL and cer.habilitado = 1 ".$where." ".$sort;
         
         //$_SESSION['consultCertificaciones'] = $query;
     
@@ -126,12 +126,8 @@ class CertificacionesDataBaseLinker
     }
 
     function agregarCertificacion($data){
-        //POR AHORA AL CAMPO FECHA LO VOY A TRATAR COMO LA FECHA EN LA QUE SE HACE LA CERTIFICACION
-        //AUNQUE EN EL ACCESS ES UN CAMPO QUE LO AGREGAN EN 1/80 CERTIFICACIONES
-        //HASTA QUE PREGUNTE
-        //IGUAL QUE HORA Y MONTO
-        $query="INSERT INTO Certificaciones (Fecha, IdProfesionales, FechaInicio, FechaFinal, IdHospital, idUsuario, idDestino)
-                 VALUES (DATE(now()), ".$data['Profesional'].", '".$data['periodoDe']."', '".$data['periodoHasta']."' , ".$data['hospital'].", ".$data['idUsuario'].",".$data['destino']."  );";
+        $query="INSERT INTO Certificaciones (Fecha, IdProfesionales, IdEspecialidad, FechaInicio, FechaFinal, IdHospital, idUsuario, idDestino)
+                 VALUES (DATE(now()), ".$data['Profesional'].",".$data['EspecialidadCer'].", '".$data['periodoDe']."', '".$data['periodoHasta']."' , ".$data['hospital'].", ".$data['idUsuario'].",".$data['destino']."  );";
 
         $response = new stdClass();
         try
@@ -159,7 +155,7 @@ class CertificacionesDataBaseLinker
 
     function traerCertificacion($id){
 
-        $query = "SELECT cer.*, pro.`Apellido y Nombre` as profesional, hos.Hospital from Certificaciones cer LEFT JOIN Profesionales pro on (cer.IdProfesionales = pro.IdProfesional) LEFT JOIN Hospitales hos on (hos.IdHospital = cer.IdHospital) WHERE cer.IdCertificacion = $id;";
+        $query = "SELECT cer.*,es.Especialidad as Especialidad, pro.`Apellido y Nombre` as profesional, hos.Hospital from Certificaciones cer LEFT JOIN Profesionales pro on (cer.IdProfesionales = pro.IdProfesional) LEFT JOIN Hospitales hos on (hos.IdHospital = cer.IdHospital) LEFT JOIN Especialidades es on (es.IdEspecialidad = cer.IdEspecialidad) WHERE cer.IdCertificacion = $id and cer.habilitado = 1;";
 
         try {
             $this->dbcert->conectar();
@@ -176,6 +172,8 @@ class CertificacionesDataBaseLinker
         $certificacion->setFecha($result['Fecha']);
         $certificacion->setIdModulado($result['IdModulado']);
         $certificacion->setIdProfesionales($result['IdProfesionales']);
+        $certificacion->setIdEspecialidad($result['idEspecialidad']);
+        $certificacion->setnombreEspecialidad($result['Especialidad']);
         $certificacion->setnombreProfesional($result['profesional']);
         $certificacion->setIdHospital($result['IdHospital']);
         $certificacion->setnombreHospital($result['Hospital']);
@@ -184,6 +182,33 @@ class CertificacionesDataBaseLinker
         $certificacion->setHoras($result['Horas']);
         $certificacion->setPorMonto($result['PorMonto']);
         return $certificacion;
+    }
+
+    function eliminarCertificacion($id){
+
+        $query  = "UPDATE Certificaciones SET habilitado = 0 WHERE IdCertificacion = $id;";
+        $response = new stdClass();
+        try
+        {   
+            $this->dbprof->conectar();
+            $this->dbprof->ejecutarAccion($query);
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Error al conectar con la base de datos", 17052013);
+            $response->message = "Error al ingresar el registro";
+            $response->ret = false;
+            $this->dbprof->desconectar();
+            return $response;   
+        }
+
+        $this->dbprof->desconectar();
+
+        $response->message = "Se ha elminado la certificacion";
+        $response->ret = true;
+
+        return $response;
+
     }
 
 }

@@ -1,5 +1,13 @@
-<link rel="stylesheet" type="text/css" href="presentacion/certificaciones/includes/css/certificacion.css" />
 <script src="presentacion/profesionales/includes/js/profesionales.js"></script>
+<?php
+
+include_once '../../../../data/especialidadesDataBaseLinker.class.php';
+
+$dbespe = new EspecialidadesDataBaseLinker();
+
+$espSelect = $dbespe->EspecialidadesSelect();
+
+?>
 
 <h1 class="centered">Agregar Profesional</h1>
 
@@ -17,7 +25,9 @@
 	
 	<div class="field">
 	<label class="labelForm" for="especialidad">Especialidad</label>
-	<input type="text" name="especialidad" id="especialidad" />
+	<select id="especialidad" name="especialidad">
+		<?php echo $espSelect; ?>
+	</select>
 	</div>
 	
 	<div class="field">
@@ -36,7 +46,7 @@
 	</div>
 	
 	<div class="field">
-	<input type="button" name="agregarProfesional" id="agregarProfesional" value="Agregar Profesional" />
+	<input type="button"  class="btnin" name="agregarProfesional" id="agregarProfesional" value="Agregar Profesional" />
 	</div>
 	</div>
 </form>

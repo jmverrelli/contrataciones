@@ -22,4 +22,29 @@ $(document).ready(function(){
 	         $('#agregarProfesionalForm')[0].reset();
 	});
 
+
 });
+
+
+function vincularEspecialidad(){
+
+	event.preventDefault(event);
+    		$.ajax({
+	            data: $('#vincularEspecialidadForm').serialize(),
+	            type: "POST",
+	            dataType: "json",
+	            url: "presentacion/profesionales/includes/ajaxFunctions/AgregarVinculoEspecialidad.php",
+	            success: function(data)
+	            {
+	                if(data.ret == false){
+	                    alert(data.message);
+	                }
+	                else{
+	                    
+	                    alert(data.message);
+	                }
+	            }
+	        });
+
+	         $('#vincularEspecialidadForm')[0].reset();
+}

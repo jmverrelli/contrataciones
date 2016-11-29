@@ -1,6 +1,5 @@
 <?php
-include_once '/home/web/namespacesAdress.php';
-include_once nspcUsuario.'usuario.class.php';
+include_once '../../../../data/usuario/usuario.class.php';
 session_start();
 $usuario = $_SESSION['usuario'];
 $data = unserialize($usuario);

@@ -4,7 +4,7 @@
 ?>
 <html>
 <head>
-	<title>Certificaciones</title>
+	<title>CONTRATACIONES</title>
 	<link media="screen" type="text/css" rel="stylesheet" href="presentacion/includes/css/login.css">
 	<link media="screen" type="text/css" rel="stylesheet" href="presentacion/includes/css/barra.css">
 </head>
@@ -16,7 +16,7 @@
         </div>
         <div id="navegar">
         	<p>&nbsp;<a href="/sistemas.php3">Sistema Salud</a>&nbsp;&gt;
-            <a>Certificaciones</a></p>
+            <a>CONTRATACIONES</a></p>
         </div>
         <!-- /navegar -->
 	</div>
@@ -24,7 +24,7 @@
 	<div class="post">
 		<div class="page">
 			<div class="logo">
-				<h1>Certificaciones</h1>
+				<h1>CONTRATACIONES</h1>
 			</div>
 			<div align="center">
 				<form method="post" action="validarInicioSession.php">

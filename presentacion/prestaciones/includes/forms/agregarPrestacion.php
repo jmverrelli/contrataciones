@@ -1,6 +1,4 @@
-<link rel="stylesheet" type="text/css" href="presentacion/certificaciones/includes/css/certificacion.css" />
 <script src="presentacion/prestaciones/includes/js/prestaciones.js"></script>
-
 <h1 class="centered">Agregar Nuevas Prestaciones</h1>
 
 <form id="agregarNuevaPrestacionForm" name="agregarNuevaPrestacionForm">
@@ -16,7 +14,7 @@
 	</div>
 	
 	<div class="field">
-	<input type="button" name="agregarNuevaPrestacionBtn" id="agregarNuevaPrestacionBtn" value="Agregar Prestacion" />
+	<input type="button"  class="btnin" name="agregarNuevaPrestacionBtn" id="agregarNuevaPrestacionBtn" value="Agregar Prestacion" />
 	</div>
 	</div>
 </form>

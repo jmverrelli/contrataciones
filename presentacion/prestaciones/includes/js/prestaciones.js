@@ -73,6 +73,7 @@ $(document).ready(function(){
 	                    
 	                    alert(data.message);
 	                }
+	                $('#jqVerPrestaciones').trigger( 'reloadGrid' );
 	            }
 	        });
 

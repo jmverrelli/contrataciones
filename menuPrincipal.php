@@ -24,12 +24,20 @@
 	<script src="presentacion/includes/js/jQuery/jquery1-12.js"></script>
 	<script src="presentacion/includes/js/jQuery/jquery-ui.min.js"></script>
 	<script src="presentacion/includes/js/timePicker/jquery.timepicker.min.js"></script>
+	<script src="presentacion/includes/js/timePicker/datepicker-es.js"></script>
+	<link rel="stylesheet" type="text/css" href="presentacion/includes/js/timePicker/jquery.timepicker.css" />
 	<!-- JQGrid -->
 	<link rel="stylesheet" type="text/css" href="presentacion/includes/js/jQGrid/css/ui.jqgrid-bootstrap-ui.css" />
 	<link rel="stylesheet" type="text/css" href="presentacion/includes/js/jQGrid/css/ui.jqgrid-bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="presentacion/includes/js/jQGrid/css/ui.jqgrid.css" />
 	<script src="presentacion/includes/js/jQGrid/js/i18n/grid.locale-es.js"></script>
 	<script src="presentacion/includes/js/jQGrid/js/jquery.jqGrid.min.js"></script>
+	<!-- Program -->
+	<script src="presentacion/certificaciones/includes/js/certificaciones.js"></script>
+	<script src="presentacion/prestaciones/includes/js/prestaciones.js"></script>
+	<script src="presentacion/locaciones/includes/js/locaciones.js"></script>
+	<script src="presentacion/profesionales/includes/js/profesionales.js"></script>
+	<link rel="stylesheet" type="text/css" href="presentacion/certificaciones/includes/css/certificacion.css" />
 
 </head>
 
@@ -52,16 +60,18 @@
 	$data = unserialize($usuario);
 	/*fin de agregado usuario*/
 
+	
+
 	?>
-
-
 	<!-- Main container -->
 	<div class="container">
+
+
 		<!-- Blueprint header -->
 		<header class="bp-header cf">
 			<div class="dummy-logo">
 				<div><img style="background-color: white; border-radius: 8px; " src="presentacion/includes/images/Check-50.png"></div>
-				<h2 class="dummy-heading">Certificaciones</h2>
+				<h2 class="dummy-heading">Contrataciones - <a href="presentacion/usuarios/mainUsuarios.php" ><img src="presentacion/usuarios/includes/images/userico.png" width="15px" height="15px" />&nbsp;<?=$data->getNombre()?> </a></h2>
 			</div>
 			
 		</header>
@@ -73,8 +83,8 @@
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-1" href="#">Certificaciones</a></li>
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-2" href="#">Profesionales</a></li>
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-3" href="#">Prestaciones</a></li>
-				<!--	
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-4" href="#">Locaciones</a></li>
+				<!--	
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-5" href="#">Coming Soon!</a></li>
 				-->
 				</ul>
@@ -99,6 +109,7 @@
 				<ul data-menu="submenu-2" class="menu__level">
 					<li class="menu__item"><a class="menu__link" href="#">Agregar Profesional</a></li>
 					<li class="menu__item"><a class="menu__link" href="#">Listar Profesionales</a></li>
+					<li class="menu__item"><a class="menu__link" href="#">Vincular Especialidad</a></li>
 				</ul>
 				<!-- Submenu 3 -->
 				<ul data-menu="submenu-3" class="menu__level">
@@ -106,13 +117,14 @@
 					<li class="menu__item"><a class="menu__link" href="#">Listar Prestaciones</a></li>
 				</ul>
 				<!-- Submenu 4 -->
-				<!--
 				<ul data-menu="submenu-4" class="menu__level">
 					<li class="menu__item"><a class="menu__link" href="#">Agregar Locacion</a></li>
-					<li class="menu__item"><a class="menu__link" href="#">Modificar Locacion</a></li>
-					<li class="menu__item"><a class="menu__link" href="#">Listar Locaciones</a></li>
+					<li class="menu__item"><a class="menu__link" href="#">Duplicado Elevacion</a></li>
+					<li class="menu__item"><a class="menu__link" href="#">Elevar Anterior</a></li>
+					<li class="menu__item"><a class="menu__link" href="#">Por Locacion</a></li>
+					<li class="menu__item"><a class="menu__link" href="#">Por Profesional</a></li>
+					<li class="menu__item"><a class="menu__link" href="#">Importe Hospital-Profesional</a></li>
 				</ul>
-				-->
 			</div>
 		</nav>
 		<div class="content" id="loaded_content" name="loaded_content">
@@ -171,12 +183,40 @@
 					$("#loaded_content").load("presentacion/profesionales/includes/forms/listarProfesional.php");
 				break;
 
+				case 'Vincular Especialidad':
+					$("#loaded_content").load("presentacion/profesionales/includes/forms/vincularEspecialidad.php");
+				break;
+
 				case 'Agregar Prestacion':
 					$("#loaded_content").load("presentacion/prestaciones/includes/forms/agregarPrestacion.php");
 				break;
 
 				case 'Listar Prestaciones':
 					$("#loaded_content").load("presentacion/prestaciones/includes/forms/verPrestaciones.php");
+				break;
+
+				case 'Agregar Locacion':
+					$("#loaded_content").load("presentacion/locaciones/includes/forms/verLocaciones.php");
+				break;
+
+				case 'Duplicado Elevacion':
+					$("#loaded_content").load("presentacion/locaciones/includes/forms/duplcadoElevacion.php");
+				break;
+
+				case 'Elevar Anterior':
+					$("#loaded_content").load("presentacion/locaciones/includes/forms/elevarAnterior.php");
+				break;
+
+				case 'Por Locacion':
+					$("#loaded_content").load("presentacion/locaciones/includes/forms/porLocacion.php");
+				break;
+
+				case 'Por Profesional':
+					$("#loaded_content").load("presentacion/locaciones/includes/forms/porProfesional.php");
+				break;
+
+				case 'Importe Hospital-Profesional':
+					$("#loaded_content").load("presentacion/locaciones/includes/forms/importeHospPro.php");
 				break;
 
 				case 'Todos':

@@ -6,6 +6,8 @@ class Certificacion {
     var $IdModulado;
     var $IdProfesionales;
     var $nombreProfesional;
+    var $IdEspecialidad;
+    var $nombreEspecialidad;
     var $IdHospital;
     var $nombreHospital;
     var $FechaInicio;
@@ -27,6 +29,10 @@ class Certificacion {
 
     public function setIdProfesionales($IdProfesionales){
         $this->IdProfesionales = $IdProfesionales;
+    }
+
+    public function setIdEspecialidad($IdEspecialidad){
+        $this->IdEspecialidad = $IdEspecialidad;
     }
 
     public function setIdHospital($IdHospital){
@@ -51,6 +57,10 @@ class Certificacion {
 
     public function setnombreProfesional($nombreProfesional){
         $this->nombreProfesional = $nombreProfesional;
+    }
+
+    public function setnombreEspecialidad($nombreEspecialidad){
+        $this->nombreEspecialidad = $nombreEspecialidad;
     }
 
     public function setnombreHospital($nombreHospital){

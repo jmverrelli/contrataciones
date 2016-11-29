@@ -14,13 +14,13 @@
             colNames:['IdPrestacion','Prestacion','Valor',''],
             colModel:[ 
                 {name:'IdPrestacion', index:'pres.IdPrestacion',width:'0%',align:"left",fixed:true,editable:false},
-                {name:'Prestacion', index:'pres.Prestacion',width:'100%',align:"left",fixed:true,editable:true},
+                {name:'Prestacion', index:'pres.Prestacion',width:'100%',align:"left",fixed:true,editable:false},
                 {name:'Valor', index:'pres.Valor',width:'100%',align:"left",fixed:true,editable:true},
-                {name: 'myac', width: '40%', fixed: true, sortable: false, resize: false, formatter: 'actions', search: false, formatoptions: 
+                {name: 'myac', width: '100%', fixed: true, sortable: false, resize: false, formatter: 'actions', search: false, formatoptions: 
                     {
                         keys: true,
                         delbutton: true,
-                        editbutton: false,
+                        editbutton: true,
                         onError: function(_, xhr) {
                             alert(xhr.responseText);
                         }
@@ -55,8 +55,6 @@
         });
 
     </script>
-    <script src="presentacion/prestaciones/includes/js/prestaciones.js"></script>
-
     <div id="cuadro" align="center" >
         <table id="jqVerPrestaciones"></table>
         <div id="jqPrestacionesfoot"></div>

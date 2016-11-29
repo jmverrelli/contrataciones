@@ -1,3 +1,4 @@
+<script src="presentacion/prestaciones/includes/js/prestaciones.js"></script>
 <?php
 include_once '../../../../data/prestacionesDataBaseLinker.class.php';
 include_once '../../../../data/certificacionesDataBaseLinker.class.php';
@@ -19,8 +20,6 @@ if($detallesCertificacion == false){
 }
 
 ?>
-<link rel="stylesheet" type="text/css" href="presentacion/certificaciones/includes/css/certificacion.css" />
-<script src="presentacion/prestaciones/includes/js/prestaciones.js"></script>
 <div>
 	<div><h5>Certificacion Activa</h5></div>
 	<table class="padd border">
@@ -40,7 +39,7 @@ if($detallesCertificacion == false){
 	<div><h5>Ingreso de Prestacion</h5></div>
 	<table class="padd border">
 	<tr>
-		<th>Prestacion</th><th>Valor</th><th>Cantidad</th><th>Total</th><th></th>
+		<th>Prestacion</th><th>Valor</th><th>Cantidad</th><th>Subtotal</th><th></th>
 	</tr>
 	<tr>
 		<td>

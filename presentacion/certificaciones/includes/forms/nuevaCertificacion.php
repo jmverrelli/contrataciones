@@ -26,18 +26,18 @@ $dbDestinos = new destinosDataBaseLinker();
 
 $destinosSelect = $dbDestinos->getDestinosSelect();
 
+
 ?>
 
-<link rel="stylesheet" type="text/css" href="presentacion/includes/js/timePicker/jquery.timepicker.css" />
-<link rel="stylesheet" type="text/css" href="presentacion/certificaciones/includes/css/certificacion.css" />
-
 <script type="text/javascript">
-	$("#periodoDe").on('click');
- 	$('#periodoDe').datepicker({ dateFormat: 'yy-mm-dd' });
+$(document).ready(function(){
+    $("#periodoDe").on('click');
+    $("#periodoHasta").on('click');
+    $('#periodoDe').datepicker({ dateFormat: 'yy-mm-dd' });
+    $('#periodoHasta').datepicker({ dateFormat: 'yy-mm-dd' });
+});
 
-	$('#periodoHasta').datepicker({ dateFormat: 'yy-mm-dd' });
 </script>
-<script src="presentacion/certificaciones/includes/js/certificaciones.js"></script>
 
 <form id="nuevaCertificacionForm" name="nuevaCertificacionForm">
 	<div class="block">
@@ -59,8 +59,14 @@ $destinosSelect = $dbDestinos->getDestinosSelect();
 	</div>
 	<div class="block">
 		<label class="labelForm" for="Profesional">Profesional</label>
-		<select id="Profesional" name="Profesional">
+		<select id="Profesional" name="Profesional" onchange="traerEspecialidades();">
 			<?php echo $profesionalesSelect; ?>
+		</select>
+	</div>
+	<div class="block">
+		<label class="labelForm" for="EspecialidadCer">Especialidad</label>
+		<select id="EspecialidadCer" name="EspecialidadCer"">
+			
 		</select>
 	</div>
 	<div class="block">

@@ -35,7 +35,7 @@ $entidad = $_SESSION['entidad'];
             <div id = "barraImage" >
             </div>
             <div style="float: left; margin-top:8px;">
-                    <p>&nbsp;<a href="/sistemas.php3">Sistema Salud</a>&nbsp;&gt;
+                    <p>&nbsp;<a href="../../menuPrincipal.php">Sistema Contrataciones</a>&nbsp;&gt;
                     <a>Usuarios</a></p>
             </div>
             <div style="float: right; text-align: right; margin-top:10px; margin-right:10px;">

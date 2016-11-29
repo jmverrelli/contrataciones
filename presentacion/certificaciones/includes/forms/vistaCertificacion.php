@@ -21,8 +21,6 @@ if($detallesCertificacion == false){
 }
 
 ?>
-<link rel="stylesheet" type="text/css" href="presentacion/certificaciones/includes/css/certificacion.css" />
-<script src="presentacion/prestaciones/includes/js/prestaciones.js"></script>
 <div>
 	<div><h5>Certificacion Activa</h5></div>
 	<table class="padd border">

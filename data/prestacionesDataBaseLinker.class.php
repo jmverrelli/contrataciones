@@ -249,5 +249,31 @@ class PrestacionesDataBaseLinker
         return $response;
     }
 
+    function modificarPrestacion($data){
+
+         $query  = "UPDATE Prestaciones SET Valor = ".$data['Valor']." WHERE IdPrestacion = ".$data['id'].";";
+        $response = new stdClass();
+        try
+        {   
+            $this->dbprest->conectar();
+            $this->dbprest->ejecutarAccion($query);
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Error al conectar con la base de datos", 17052013);
+            $response->message = "Error al ingresar el registro";
+            $response->ret = false;
+            $this->dbprest->desconectar();
+            return $response;   
+        }
+
+        $this->dbprest->desconectar();
+
+        $response->message = "Se ha modificado la prestacion";
+        $response->ret = true;
+
+        return $response;
+    }
+
 
 }

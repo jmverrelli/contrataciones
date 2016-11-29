@@ -46,5 +46,32 @@ class HospitalesDataBaseLinker
 
     }
 
+    function getArrayHosp(){
+
+        $query="SELECT IdHospital, Hospital FROM Hospitales";
+
+        try {
+
+            $this->dbhosp->conectar();
+            $this->dbhosp->ejecutarQuery($query);
+            
+        } catch (Exception $e) {
+            $this->dbhosp->desconectar();
+            return false;
+        }
+
+        $ret = array();
+
+        for ($i = 0; $i < $this->dbhosp->querySize; $i++)
+        {
+            $hospitales = $this->dbhosp->fetchRow($query);
+            $ret[] = $hospitales;
+        }
+
+        $this->dbhosp->desconectar();
+
+        return $ret;
+    }
+
 
 }

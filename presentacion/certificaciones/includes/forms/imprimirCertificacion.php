@@ -16,7 +16,7 @@ $dbdest = new destinosDataBaseLinker();
 
 $detallesCertificacion = $dbDetalleCert->traerDetallesCertificacion($idCertificacion);
 $certificacion = $dbCert->traerCertificacion($idCertificacion);
-$profesional = $dbprof->traerProfesional($certificacion->IdProfesionales);
+$profesional = $dbprof->traerProfesional($certificacion->IdProfesionales, $idCertificacion);
 $destino = $dbdest->traerDestino($idCertificacion);
 
 if (($timestamp = strtotime($certificacion->FechaFinal)) !== false)
@@ -29,11 +29,14 @@ if (($timestamp = strtotime($certificacion->FechaFinal)) !== false)
 <style type="text/css">
 	
 	.impresion{		
-		text-align: center;
+		text-align: left;
 		margin-top: 2%;
 		margin-left: auto;
 		margin-right: auto;
 		width: 50em;
+	}
+	.center{
+		text-align: center;
 	}
 
 	.leblock{
@@ -78,6 +81,28 @@ if (($timestamp = strtotime($certificacion->FechaFinal)) !== false)
     text-align: center;
 }
 
+#content {
+    display: table;
+    float:right;
+}
+
+#pageFooter {
+    display: table-footer-group;
+}
+
+#pageFooter:after {
+    counter-increment: page;
+    content:"Pagina " counter(page);
+    left: 0; 
+    top: 100%;
+    white-space: nowrap; 
+    z-index: 20px;
+    -moz-border-radius: 5px; 
+    -moz-box-shadow: 0px 0px 4px #222;  
+    background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);  
+    background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);  
+  }
+
 </style>
 
 <div id="aImprimir" name="aImprimir" class="impresion">
@@ -86,18 +111,18 @@ if (($timestamp = strtotime($certificacion->FechaFinal)) !== false)
 		<div class="image">
 			<img src="../../../includes/images/logo.png" width="128px" height="170px">
 		</div>
-		<div class="text">
+		<div class="text center">
 			<h2 >MUNICIPALIDAD MALVINAS ARGENTINAS</h2>
 			<h2>SECRETARIA DE SALUD</h2>
 			<h4>Direccion: AV. PTE. PERON 3127 &nbsp;&nbsp;&nbsp;LOS POLVORINES
 		</div>
-		<div class="text">
+		<div class="text center">
 			<h1>CERTIFICACION DE SERVICIOS</h1>
 			
 		</div>
 		<div class="parra">
 			<span>Sr. Director.
-			Me dirijo a usted a los efectos de informar que durante el periodo correspondiente al mes <?php echo $php_date['mon']; ?> del año <?php echo $php_date['year']; ?> he procedido a cumplimentar las siguentes prestaciones conforme se establecio en el convenio de locacion de obra que suscripto como <b><?php echo $profesional['Especialidad']; ?></b> con la Municipalidad de Malvinas Argentinas (contrato <b><?php echo $profesional['Nro Convenio']; ?></b>).</span>
+			Me dirijo a usted a los efectos de informar que durante el periodo correspondiente al mes <?php echo $php_date['mon']; ?> del año <?php echo $php_date['year']; ?> he procedido a cumplimentar las siguentes prestaciones conforme se establecio en el convenio de locacion de obra que suscripto como <b><?php echo $certificacion->nombreEspecialidad; ?></b> con la Municipalidad de Malvinas Argentinas (contrato <b><?php echo $profesional['Nro Convenio']; ?></b>).</span>
 
 		</div>
 
@@ -149,7 +174,9 @@ if (($timestamp = strtotime($certificacion->FechaFinal)) !== false)
 		</dib>
 	</div>
 
-
+<div id="content">
+  <div id="pageFooter"></div>
+</div>
 
 </div>
 

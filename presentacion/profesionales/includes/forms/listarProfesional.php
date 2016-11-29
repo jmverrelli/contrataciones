@@ -11,11 +11,10 @@
             url:'presentacion/profesionales/includes/ajaxFunctions/MostrarProfesionales.php', 
             mtype: "POST",
             datatype: "json",
-            colNames:['IdProfesional','Apellido y Nombre','Especialidad','Nro Convenio','Nro Proveedor','Telefono',''],
+            colNames:['IdProfesional','Apellido y Nombre','Nro Convenio','Nro Proveedor','Telefono',''],
             colModel:[ 
                 {name:'IdProfesional', index:'pro.IdProfesional',width:'0%',align:"left",fixed:true,editable:false},
                 {name:'Apellido y Nombre', index:'pro.`Apellido y Nombre`',width:'100%',align:"left",fixed:true,editable:true},
-                {name:'Especialidad', index:'pro.Especialidad',width:'100%',align:"left",fixed:true,editable:true},
                 {name:'Nro Convenio', index:'pro.`Nro Convenio`',width:'100%',align:"left",fixed:true,editable:true},
                 {name:'Nro Proveedor', index:'pro.`Nro Proveedor`',width:'100%',align:"left",fixed:true,editable:true},
                 {name:'Telefono', index:'pro.Telefono',width:'100%',align:"left",fixed:true,editable:true},
@@ -58,7 +57,7 @@
         });
 
     </script>
-    <script src="presentacion/profesionales/includes/js/profesionales.js"></script>
+
 
     <div id="cuadro" align="center" >
         <table id="jqVerProfesionales"></table>
