@@ -7,7 +7,7 @@ $('#verPorProfesionalFinal').datepicker({ dateFormat: 'yy-mm-dd' });
 
 </script>
 
-<h1 class="centered">Ver Por Locacion</h1>
+<h1 class="centered">Ver Por Profesional</h1>
 
 <form id="verPorProfesionalForm" name="verPorProfesionalForm">
 	<div class="centered">
