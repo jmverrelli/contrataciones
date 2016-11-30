@@ -1,10 +1,30 @@
+
+<?php 
+
+    /*Agregado para que tenga el usuario*/
+    include_once '../../../../data/usuario/usuarioDatabaseLinker.class.php';
+    session_start();
+
+    if(!isset($_SESSION['usuario']))
+    {
+        echo "<div class='info' align='center'>Por favor refresque la pagina.</div>"; exit;
+    }
+
+    $usuario = $_SESSION['usuario'];
+
+    $data = unserialize($usuario);
+    /*fin de agregado usuario*/
+
+
+if (!$data->tienePermiso('LOCACIONES')){ echo "<div class='info' align='center'>No posee permisos para realizar esta accion.</div>"; exit;}
+
+?>
+
 <?php
 include_once '../../../../data/locacionesDataBaseLinker.class.php';
 $dbLoc = new locacionesDataBaseLinker();
 
 $noElevados = $dbLoc->duplicadosElevacion();
-
-session_start();
 
 unset($_SESSION['LocNoElev']);
 

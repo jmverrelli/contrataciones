@@ -84,6 +84,7 @@
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-2" href="#">Profesionales</a></li>
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-3" href="#">Prestaciones</a></li>
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-4" href="#">Locaciones</a></li>
+					<li class="menu__item"><a class="menu__link" data-submenu="submenu-5" href="#">Especialidades</a></li>
 				<!--	
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-5" href="#">Coming Soon!</a></li>
 				-->
@@ -124,6 +125,11 @@
 					<li class="menu__item"><a class="menu__link" href="#">Por Locacion</a></li>
 					<li class="menu__item"><a class="menu__link" href="#">Por Profesional</a></li>
 					<li class="menu__item"><a class="menu__link" href="#">Importe Hospital-Profesional</a></li>
+				</ul>
+				<!-- Submenu 5 -->
+				<ul data-menu="submenu-5" class="menu__level">
+					<li class="menu__item"><a class="menu__link" href="#">Agregar Especialidad</a></li>
+					<li class="menu__item"><a class="menu__link" href="#">Ver Especialidades</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -217,6 +223,14 @@
 
 				case 'Importe Hospital-Profesional':
 					$("#loaded_content").load("presentacion/locaciones/includes/forms/importeHospPro.php");
+				break;
+
+				case 'Agregar Especialidad':
+					$("#loaded_content").load("presentacion/especialidades/includes/forms/agregarEspecialidad.php");
+				break;
+
+				case 'Ver Especialidades':
+					$("#loaded_content").load("presentacion/especialidades/includes/forms/verEspecialidades.php");
 				break;
 
 				case 'Todos':

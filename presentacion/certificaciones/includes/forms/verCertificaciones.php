@@ -7,7 +7,7 @@
 
     if(!isset($_SESSION['usuario']))
     {
-        header ("Location:../../../../index.php?logout=1");
+        echo "<div class='info' align='center'>Por favor refresque la pagina.</div>"; exit;
     }
 
     $usuario = $_SESSION['usuario'];

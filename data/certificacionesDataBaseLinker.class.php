@@ -35,13 +35,10 @@ class CertificacionesDataBaseLinker
             $row = array();
             $row[] = $certificacion['IdCertificacion'];
             $row[] = $certificacion['Fecha'];
-            $row[] = $certificacion['IdModulado'];
             $row[] = $certificacion['IdProfesionales'];
             $row[] = $certificacion['IdHospital'];
             $row[] = $certificacion['FechaInicio'];
             $row[] = $certificacion['FechaFinal'];
-            $row[] = $certificacion['Horas'];
-            $row[] = $certificacion['PorMonto'];
             $row[] = '';
             //agrego datos a la fila con clave cell
             $response->rows[$i]['cell'] = $row;
@@ -49,13 +46,10 @@ class CertificacionesDataBaseLinker
 
         $response->userdata['IdCertificacion']= 'IdCertificacion';
         $response->userdata['Fecha']= 'Fecha';
-        $response->userdata['IdModulado']= 'IdModulado';
         $response->userdata['IdProfesionales']= 'IdProfesionales';
         $response->userdata['IdHospital']= 'IdHospital';
         $response->userdata['FechaInicio']= 'FechaInicio';
         $response->userdata['FechaFinal']= 'FechaFinal';
-        $response->userdata['Horas']= 'Horas';
-        $response->userdata['PorMonto']= 'PorMonto';
         $response->userdata['myac'] = '';
 
         return json_encode($response);
@@ -82,13 +76,10 @@ class CertificacionesDataBaseLinker
         $query="SELECT
                     cer.IdCertificacion,
                     cer.Fecha,
-                    cer.IdModulado,
                     cer.IdProfesionales,
                     cer.IdHospital,
                     cer.FechaInicio,
-                    cer.FechaFinal,
-                    cer.Horas,
-                    cer.PorMonto
+                    cer.FechaFinal
                 FROM 
                     Certificaciones cer
                 WHERE
@@ -170,7 +161,6 @@ class CertificacionesDataBaseLinker
         $certificacion = new Certificacion();
         $certificacion->setIdCertificacion($result['IdCertificacion']);
         $certificacion->setFecha($result['Fecha']);
-        $certificacion->setIdModulado($result['IdModulado']);
         $certificacion->setIdProfesionales($result['IdProfesionales']);
         $certificacion->setIdEspecialidad($result['idEspecialidad']);
         $certificacion->setnombreEspecialidad($result['Especialidad']);
@@ -179,8 +169,6 @@ class CertificacionesDataBaseLinker
         $certificacion->setnombreHospital($result['Hospital']);
         $certificacion->setFechaInicio($result['FechaInicio']);
         $certificacion->setFechaFinal($result['FechaFinal']);
-        $certificacion->setHoras($result['Horas']);
-        $certificacion->setPorMonto($result['PorMonto']);
         return $certificacion;
     }
 

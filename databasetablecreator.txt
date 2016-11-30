@@ -1,0 +1,147 @@
+CREATE DATABASE `contrataciones` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+CREATE TABLE `Certificaciones` (
+  `IdCertificacion` int(11) NOT NULL AUTO_INCREMENT,
+  `Fecha` date DEFAULT NULL,
+  `IdProfesionales` int(11) DEFAULT NULL,
+  `idEspecialidad` int(11) DEFAULT NULL,
+  `IdHospital` int(11) DEFAULT NULL,
+  `FechaInicio` date DEFAULT NULL,
+  `FechaFinal` date DEFAULT NULL,
+  `idDestino` int(11) DEFAULT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
+  `habilitado` tinyint(4) DEFAULT '1',
+  PRIMARY KEY (`IdCertificacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `Destinos` (
+  `idDestino` int(11) NOT NULL AUTO_INCREMENT,
+  `Sector` varchar(45) DEFAULT NULL,
+  `Director` varchar(80) DEFAULT NULL,
+  `habilitado` int(11) DEFAULT '1',
+  PRIMARY KEY (`idDestino`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `Detalle de Certificacion` (
+  `IddetalleCertificacion` int(11) NOT NULL AUTO_INCREMENT,
+  `IdCertificacion` int(11) DEFAULT NULL,
+  `valor` double DEFAULT NULL,
+  `Cantidad` double DEFAULT NULL,
+  `IdPrestacion` int(11) DEFAULT NULL,
+  `habilitado` tinyint(4) DEFAULT '1',
+  PRIMARY KEY (`IddetalleCertificacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `Detalles de Locacion` (
+  `IdDetallesLocacion` int(11) NOT NULL AUTO_INCREMENT,
+  `IdHospital` int(11) DEFAULT NULL,
+  `Monto` double DEFAULT NULL,
+  `IdLocacion` int(11) DEFAULT NULL,
+  `Habilitado` tinyint(4) DEFAULT '1',
+  PRIMARY KEY (`IdDetallesLocacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `Especialidades` (
+  `IdEspecialidad` int(11) NOT NULL AUTO_INCREMENT,
+  `Especialidad` varchar(200) DEFAULT NULL,
+  `habilitado` tinyint(4) DEFAULT '1',
+  PRIMARY KEY (`IdEspecialidad`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `Hospitales` (
+  `Id` int(11) NOT NULL,
+  `IdHospital` int(11) DEFAULT NULL,
+  `Hospital` varchar(45) DEFAULT NULL,
+  `Director` varchar(45) DEFAULT NULL,
+  `Direccion` varchar(45) DEFAULT NULL,
+  `Localidad` varchar(45) DEFAULT NULL,
+  `Cargo` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `Locaciones` (
+  `IdLocacion` int(11) NOT NULL AUTO_INCREMENT,
+  `IdProfesional` int(11) DEFAULT NULL,
+  `Locacion` varchar(45) DEFAULT NULL,
+  `FechaInicio` date DEFAULT NULL,
+  `FechaFinal` date DEFAULT NULL,
+  `IdEspecialidad` int(11) DEFAULT NULL,
+  `Elevado` tinyint(4) DEFAULT '0',
+  `FechaElevado` datetime DEFAULT NULL,
+  `Habilitado` tinyint(4) DEFAULT '1',
+  `fecha_creacion` datetime DEFAULT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IdLocacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `Periodo` (
+  `IdPeriodo` int(11) NOT NULL,
+  `Periodo` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`IdPeriodo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `Prestaciones` (
+  `IdPrestacion` int(11) NOT NULL AUTO_INCREMENT,
+  `Prestacion` varchar(45) DEFAULT NULL,
+  `Valor` double DEFAULT NULL,
+  `habilitado` tinyint(4) DEFAULT '1',
+  PRIMARY KEY (`IdPrestacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `Profesionales` (
+  `IdProfesional` int(11) NOT NULL AUTO_INCREMENT,
+  `Apellido y Nombre` varchar(45) DEFAULT NULL,
+  `Nro Convenio` int(11) DEFAULT NULL,
+  `Nro Proveedor` int(11) DEFAULT NULL,
+  `Telefono` varchar(45) DEFAULT NULL,
+  `habilitado` tinyint(4) DEFAULT '1',
+  PRIMARY KEY (`IdProfesional`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `Profesional_Especialidad` (
+  `IdProfesional_Especialidad` int(11) NOT NULL AUTO_INCREMENT,
+  `IdProfesional` int(11) DEFAULT NULL,
+  `IdEspecialidad` int(11) DEFAULT NULL,
+  `habilitado` tinyint(4) DEFAULT '1',
+  PRIMARY KEY (`IdProfesional_Especialidad`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `user_permiso` (
+  `iduser_permiso` varchar(45) NOT NULL,
+  `detalle` varchar(255) NOT NULL,
+  `entidad` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`iduser_permiso`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `user_usuario` (
+  `iduser_usuario` int(11) NOT NULL,
+  `detalle` varchar(45) DEFAULT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `contrasena` varchar(45) DEFAULT NULL,
+  `habilitado` tinyint(1) DEFAULT '1',
+  `fecha` datetime DEFAULT NULL,
+  `entidad` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`iduser_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `user_usuario_permiso` (
+  `iduser_usuario` int(11) NOT NULL,
+  `iduser_permiso` varchar(45) NOT NULL,
+  PRIMARY KEY (`iduser_usuario`,`iduser_permiso`),
+  KEY `fk_user_usuario_permiso_1` (`iduser_usuario`),
+  KEY `fk_user_usuario_permiso_2` (`iduser_permiso`),
+  CONSTRAINT `fk_user_usuario_permiso_1` FOREIGN KEY (`iduser_usuario`) REFERENCES `user_usuario` (`iduser_usuario`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_usuario_permiso_2` FOREIGN KEY (`iduser_permiso`) REFERENCES `user_permiso` (`iduser_permiso`) ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+

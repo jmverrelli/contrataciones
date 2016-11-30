@@ -1,4 +1,4 @@
-<h1 class="centered">Certificaciones</h1>
+<h1 class="centered">Profesionales</h1>
 
 <div class="centered">
 

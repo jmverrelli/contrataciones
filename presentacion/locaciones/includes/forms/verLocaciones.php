@@ -1,3 +1,25 @@
+<?php 
+
+    /*Agregado para que tenga el usuario*/
+    include_once '../../../../data/usuario/usuarioDatabaseLinker.class.php';
+    session_start();
+
+    if(!isset($_SESSION['usuario']))
+    {
+        echo "<div class='info' align='center'>Por favor refresque la pagina.</div>"; exit;
+    }
+
+    $usuario = $_SESSION['usuario'];
+
+    $data = unserialize($usuario);
+    /*fin de agregado usuario*/
+
+
+if (!$data->tienePermiso('LOCACIONES')){ echo "<div class='info' align='center'>No posee permisos para realizar esta accion.</div>"; exit;}
+
+?>
+
+
 <h1 class="centered">Locaciones</h1>
 
 <div class="centered">
