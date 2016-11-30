@@ -330,6 +330,7 @@ function traerLocacionesAnteriores(){
                             
                             text += "<li>";
                             text += data.message[i].Locacion;
+                            text += "(" + data.message[i].Especialidad + ")";
                             text += "</li>";
 
                             document.getElementById('locacionesAnteriores').innerHTML = text;

@@ -19,7 +19,7 @@ class LocacionesDataBaseLinker
 
         $response = new stdClass();
 
-        if(!$this->existeLocacion($data['Profesional'], $data['locacion'])){
+        if(!$this->existeLocacion($data['Profesional'], $data['locacion'], $data['EspecialidadLoc'])){
 
             $response->message = "Ya existe la locacion para el Profesional";
             $response->ret = false;
@@ -387,9 +387,9 @@ class LocacionesDataBaseLinker
     }
 
 
-    function existeLocacion($IdProfesional, $locacion){
+    function existeLocacion($IdProfesional, $locacion, $IdEspecialidad){
 
-        $query = "SELECT * FROM Locaciones WHERE IdProfesional = $IdProfesional and Locacion = '".$locacion."' ;";
+        $query = "SELECT * FROM Locaciones WHERE IdProfesional = $IdProfesional and Locacion = '".$locacion."' and IdEspecialidad = $IdEspecialidad ;";
 
         try
         {
@@ -421,7 +421,7 @@ class LocacionesDataBaseLinker
 
     function traerLocacionesAnteriores($IdProfesional){
 
-        $query = "SELECT * FROM Locaciones WHERE IdProfesional = $IdProfesional ORDER BY Locacion DESC;";
+        $query = "SELECT loc.*, esp.Especialidad FROM Locaciones loc LEFT JOIN Especialidades esp on (loc.IdEspecialidad = esp.IdEspecialidad) WHERE loc.IdProfesional = $IdProfesional ORDER BY loc.fecha_creacion DESC;";
 
         $response = new stdClass();
 
@@ -612,7 +612,7 @@ class LocacionesDataBaseLinker
                 LEFT JOIN Profesionales on (Locaciones.IdProfesional = Profesionales.IdProfesional) LEFT JOIN
                 Profesional_Especialidad on (Profesionales.IdProfesional = Profesional_Especialidad.IdProfesional) LEFT JOIN Especialidades
                 on (Especialidades.IdEspecialidad = Profesional_Especialidad.IdEspecialidad) 
-                WHERE Locaciones.Locacion = '".$data['verPorLocacionLocacion']."' and Hospitales.IdHospital = ".$data['porLocHospital']." ORDER BY  Hospitales.Hospital, Especialidades.Especialidad, Profesionales.`Apellido y nombre`;";
+                WHERE Locaciones.habilitado = 1 and `Detalles de Locacion`.habilitado = 1 and Locaciones.Locacion = '".$data['verPorLocacionLocacion']."' and Hospitales.IdHospital = ".$data['porLocHospital']." ORDER BY  Hospitales.Hospital, Especialidades.Especialidad, Profesionales.`Apellido y nombre`;";
 
         $response = new stdClass();
 
@@ -764,7 +764,7 @@ function PorLocacionExcel(){
 
         $query = "SELECT Locaciones.IdProfesional, SUM(`Detalles de Locacion`.Monto) as Monto, Profesionales.`Apellido y Nombre` 
 FROM Locaciones LEFT JOIN `Detalles de Locacion` on `Detalles de Locacion`.IdLocacion = Locaciones.IdLocacion
-LEFT JOIN Profesionales on Locaciones.IdProfesional = Profesionales.IdProfesional WHERE (Locaciones.FechaInicio BETWEEN '".$data['verPorProfesionalInicio']."' and '".$data['verPorProfesionalFinal']."') GROUP BY Profesionales.IdProfesional;";
+LEFT JOIN Profesionales on Locaciones.IdProfesional = Profesionales.IdProfesional WHERE Locaciones.habilitado = 1 and `Detalles de Locacion`.habilitado = 1 and (Locaciones.FechaInicio BETWEEN '".$data['verPorProfesionalInicio']."' and '".$data['verPorProfesionalFinal']."') GROUP BY Profesionales.IdProfesional;";
 
         $response = new stdClass();
 

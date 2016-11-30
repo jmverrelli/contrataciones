@@ -74,7 +74,7 @@ $dbLocaciones = new locacionesDataBaseLinker();
 		</select>
 	</div>
 
-	<div class="block" style="float:right; width:30%;">
+	<div class="block" style="float:right; width:40%;">
 		<div id="locacionesAnteriores" name="locacionesAnteriores"></div>
 	</div>
 
