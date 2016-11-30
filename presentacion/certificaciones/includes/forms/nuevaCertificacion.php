@@ -60,6 +60,7 @@ $(document).ready(function(){
 	<div class="block">
 		<label class="labelForm" for="Profesional">Profesional</label>
 		<select id="Profesional" name="Profesional" onchange="traerEspecialidades();">
+			<option value="SELECCIONAR">Seleccione un Profesional</option>
 			<?php echo $profesionalesSelect; ?>
 		</select>
 	</div>

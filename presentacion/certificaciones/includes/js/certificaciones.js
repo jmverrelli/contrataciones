@@ -23,6 +23,12 @@ $(document).ready(function(){
                                 "Agregar Certificacion":function()
                                 {
 
+                                    if($("#Profesional").val() == 'SELECCIONAR')
+                                    {
+                                        alert("Debe seleccionar un Profesional de la lista.");
+                                        return;
+                                    }
+
                                     if(!validar()){
                                         alert("Debe seleccionar fechas de periodo.");
                                         return;
