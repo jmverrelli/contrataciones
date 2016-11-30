@@ -178,19 +178,19 @@ class CertificacionesDataBaseLinker
         $response = new stdClass();
         try
         {   
-            $this->dbprof->conectar();
-            $this->dbprof->ejecutarAccion($query);
+            $this->dbcert->conectar();
+            $this->dbcert->ejecutarAccion($query);
         }
         catch (Exception $e)
         {
             throw new Exception("Error al conectar con la base de datos", 17052013);
             $response->message = "Error al ingresar el registro";
             $response->ret = false;
-            $this->dbprof->desconectar();
+            $this->dbcert->desconectar();
             return $response;   
         }
 
-        $this->dbprof->desconectar();
+        $this->dbcert->desconectar();
 
         $response->message = "Se ha elminado la certificacion";
         $response->ret = true;
