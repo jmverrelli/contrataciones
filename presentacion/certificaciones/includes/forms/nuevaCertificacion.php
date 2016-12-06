@@ -39,7 +39,7 @@ $(document).ready(function(){
 
 </script>
 
-<form id="nuevaCertificacionForm" name="nuevaCertificacionForm">
+<form id="nuevaCertificacionForm" name="nuevaCertificacionForm" class="dialogContainer">
 	<div class="block">
 		<label class="labelForm" for="hospital">Hospital</label>
 		<select id="hospital" name="hospital">

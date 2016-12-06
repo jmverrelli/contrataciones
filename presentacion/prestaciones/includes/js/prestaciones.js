@@ -1,6 +1,18 @@
-function traerValor(){
-	$.ajax({
-          	data: $('#nuevaPrestacion').serialize(),
+var presta = "";
+
+function calculartotal(){ //TODO VALIDAR EL INGRESO DE LOS DETALLES
+
+	var valor = $("#valorPrestacionCertificacion").val();
+	var cantidad = $("#cantidad").val()
+	$("#total").val(valor * cantidad);
+}
+
+function traerValorPrestacion(select){
+
+    	var presta = $("#prestacion option:selected").val();
+    	var IdCertificacion = $("#IdCertificacion").val();
+        $.ajax({
+          	data: {prestacion:presta,IdCertificacion:IdCertificacion},
           	type: "POST",
           	dataType: "json",
           	url: "presentacion/prestaciones/includes/ajaxFunctions/traerValorCertificacion.php",
@@ -11,7 +23,7 @@ function traerValor(){
           			//alert("Hubo un error encontrando el valor para esta prestacion.");
           		}
           		else{
-          			$("#valor").val(data);
+          			$("#valorPrestacionCertificacion").val(data);
 	        	}
         		
 
@@ -19,14 +31,27 @@ function traerValor(){
         });
 }
 
-function calculartotal(){ //TODO VALIDAR EL INGRESO DE LOS DETALLES
+function cargarPrestaciones(combo){
 
-	var valor = $("#valor").val();
-	var cantidad = $("#cantidad").val()
-	$("#total").val(valor * cantidad);
+	$.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "presentacion/prestaciones/includes/ajaxFunctions/traerPrestacionesJson.php",
+        success: function(data)
+        {
+        	
+           $.each(data,function(key, value)
+			{
+			    combo.append('<option value=' + value['IdPrestacion'] + '>' + value['Prestacion'] + '</option>');
+			});
+           
+        }
+    }); 
 }
 
 $(document).ready(function(){
+
+
 
     $('#agregarPrestacion').click(function(event){
     	event.preventDefault(event);
@@ -49,7 +74,7 @@ $(document).ready(function(){
 	            }
 	        });
 
-	        $("#valor").val('');
+	        $("#valorPrestacionCertificacion").val('');
 	        $("#cantidad").val('');
 	        $("#total").val('');
 	    	$('#prestacion>option:eq(0)').prop('selected', true);

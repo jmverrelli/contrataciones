@@ -57,7 +57,7 @@ class DetalleCertificacionesDataBaseLinker
 	function agregarDetalleCertificacion($data){
 
 		 $query="INSERT INTO `Detalle de Certificacion` (IdCertificacion, valor, Cantidad, IdPrestacion)
-                 VALUES (".$data['IdCertificacion'].", TRUNCATE(".$data['valor'].",2), TRUNCATE(".$data['cantidad'].",2), ".$data['prestacion']." );";
+                 VALUES (".$data['IdCertificacion'].", TRUNCATE(".$data['valorPrestacionCertificacion'].",2), TRUNCATE(".$data['cantidad'].",2), ".$data['prestacion']." );";
 
         $response = new stdClass();
         try

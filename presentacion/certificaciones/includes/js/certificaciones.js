@@ -50,7 +50,31 @@ $(document).ready(function(){
                                                 
                                                 alert(data.message);
                                                 $(this).dialog("close");
-                                                agregarPrestaciones(data.lastId);
+
+                                                $("#dialog:ui-dialog").dialog( "close" );
+                                                $("#dialog:ui-dialog").dialog( "destroy" );
+                                                $("#dialogAgregarPrestaciones").css('visibility',"visible");
+                                                $("#dialogAgregarPrestaciones").load("presentacion/prestaciones/includes/forms/prestacionCertificacion.php",{id:data.lastId},function() 
+                                                {
+                                                    $("#dialogAgregarPrestaciones").dialog({
+                                                        title: "Agregar Prestaciones",
+                                                        modal: true,
+                                                        resizable : true,
+                                                         closeOnEscape: false,
+                                                        open: function(event, ui) {
+                                                            $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+                                                        },
+                                                        width: "80%",
+                                                        buttons:
+                                                                {
+                                                                    "Cerrar":function()
+                                                                    {
+                                                                        //$("#dialogAgregarPrestaciones").remove();
+                                                                        $(this).dialog("close").remove();
+                                                                    }
+                                                                }
+                                                    });
+                                                });
                                             }
 
                                             $('#jgVerCertificaciones').trigger( 'reloadGrid' );
@@ -101,24 +125,8 @@ function traerEspecialidades(){
 
 function agregarPrestaciones(id){
 
-         	$("#dialog:ui-dialog").dialog( "destroy" );
-            $("#dialogAgregarPrestaciones").css('visibility',"visible");
-            $("#dialogAgregarPrestaciones").load("presentacion/prestaciones/includes/forms/prestacionCertificacion.php",{id:id},function() 
-            {
-                $("#dialogAgregarPrestaciones").dialog({
-                    title: "Agregar Prestaciones",
-                    modal: true,
-                    resizable : true,
-                    width: "80%",
-                    buttons:
-                            {
-                                "Cerrar":function()
-                                {
-                                    $(this).dialog("close");
-                                }
-                            }
-                });
-            });
+
+         	
 }
 
 
@@ -210,28 +218,29 @@ function eliminarDetalle(event, IddetalleCertificacion){
 
 function detalleCertificacion(id){
 
+    $("#dialogVistaCertificacion").load("presentacion/certificaciones/includes/forms/vistaCertificacion.php",{id:id});
 	$("#dialog:ui-dialog").dialog( "destroy" );
-            $("#dialogVistaCertificacion").css('visibility',"visible");
-            $("#dialogVistaCertificacion").load("presentacion/certificaciones/includes/forms/vistaCertificacion.php",{id:id},function() 
-            {
-                $("#dialogVistaCertificacion").dialog({
-                    title: "Certificacion",
-                    modal: true,
-                    resizable : true,
-                    width: "80%",
-                    buttons:
-                            {
-                            	"Imprimir":function()
-                                {
-                                    loadOtherPage(id);
-                                },
-                                "Cerrar":function()
-                                {
-                                    $(this).dialog("close");
-                                }
-                            }
-                });
-            });
+    $("#dialogVistaCertificacion").css('visibility',"visible");
+   
+        //$('#nuevaPrestacion').empty();
+
+    $("#dialogVistaCertificacion").dialog({
+        title: "Certificacion",
+        modal: true,
+        resizable : true,
+        width: "80%",
+        buttons:
+                {
+                	"Imprimir":function()
+                    {
+                        loadOtherPage(id);
+                    },
+                    "Cerrar":function()
+                    {
+                        $(this).dialog("close");
+                    }
+                }
+    });
 }
 
 

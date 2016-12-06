@@ -26,7 +26,7 @@ if (!$data->tienePermiso('CERTIFICAR')){ echo "<div class='info' align='center'>
 </div>
 
     <script type="text/javascript">
-        
+
         $("#jgVerCertificaciones").jqGrid(
         { 
             url:'presentacion/certificaciones/includes/ajaxFunctions/MostrarCertificaciones.php', 
@@ -93,13 +93,16 @@ if (!$data->tienePermiso('CERTIFICAR')){ echo "<div class='info' align='center'>
 
     </script>
     <script src="presentacion/certificaciones/includes/js/certificaciones.js"></script>
-<form id="formParentCert" name="formParentCert">
+
     <div id="cuadro" align="center" >
         <table id="jgVerCertificaciones"></table>
         <div id="jqCertificacionesfoot"></div>
+        <form id="formParentCert" name="formParentCert">
          <input class="btnin" type="submit" value="Nueva Certificacion" id="nuevaCertificacion">
+        </form>
     </div>
+    <div class="dialogContainer">
     <div id="dialogNuevaCertificacion" name="dialogNuevaCertificacion"></div>
     <div id="dialogAgregarPrestaciones" name="dialogAgregarPrestaciones"></div>
     <div id="dialogVistaCertificacion" name="dialogVistaCertificacion"></div>
-</form>
+    </div>

@@ -76,6 +76,34 @@ class PrestacionesDataBaseLinker
 
 	}
 
+    function traerPrestacionesJson(){
+
+        $query = "SELECT IdPrestacion, Prestacion FROM Prestaciones WHERE habilitado = 1 ORDER BY Prestacion ASC;";
+
+        try {
+
+            $this->dbprest->conectar();
+            $this->dbprest->ejecutarQuery($query);
+            
+        } catch (Exception $e) {
+            $this->dbprest->desconectar();
+            return false;
+        }
+
+        $ret = array();
+
+        for ($i = 0; $i < $this->dbprest->querySize; $i++)
+        {
+            $prestaciones = $this->dbprest->fetchRow($query);
+            $ret[] = $prestaciones;
+        }
+
+        $this->dbprest->desconectar();
+
+        return json_encode($ret);
+
+    }
+
 	function traerValor($data){
 
 		$query= "SELECT Valor FROM Prestaciones WHERE IdPrestacion = ".$data['prestacion'].";";
