@@ -50,7 +50,7 @@ $(document).ready(function(){
                                                 
                                                 alert(data.message);
                                                 $(this).dialog("close");
-
+                                                $(this).append("<div id='dialogAgregarPrestaciones' name='dialogAgregarPrestaciones'></div>");
                                                 $("#dialog:ui-dialog").dialog( "close" );
                                                 $("#dialog:ui-dialog").dialog( "destroy" );
                                                 $("#dialogAgregarPrestaciones").css('visibility',"visible");

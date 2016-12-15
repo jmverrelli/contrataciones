@@ -103,6 +103,5 @@ if (!$data->tienePermiso('CERTIFICAR')){ echo "<div class='info' align='center'>
     </div>
     <div class="dialogContainer">
     <div id="dialogNuevaCertificacion" name="dialogNuevaCertificacion"></div>
-    <div id="dialogAgregarPrestaciones" name="dialogAgregarPrestaciones"></div>
-    <div id="dialogVistaCertificacion" name="dialogVistaCertificacion"></div>
+    <div id='dialogVistaCertificacion' name='dialogVistaCertificacion'></div>
     </div>

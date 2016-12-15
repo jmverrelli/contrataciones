@@ -80,7 +80,7 @@
 			<button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
 			<div class="menu__wrap">
 				<ul data-menu="main" class="menu__level">
-					<li class="menu__item"><a class="menu__link" data-submenu="submenu-1" href="#">Certificaciones</a></li>
+					<li class="menu__item"><a id="certBtnPrinc" name="certBtnPrinc" class="menu__link" data-submenu="submenu-1" href="#">Certificaciones</a></li>
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-2" href="#">Profesionales</a></li>
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-3" href="#">Prestaciones</a></li>
 					<li class="menu__item"><a class="menu__link" data-submenu="submenu-4" href="#">Locaciones</a></li>

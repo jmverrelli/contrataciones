@@ -38,7 +38,7 @@ if($detallesCertificacion == false){
 <hr />
 <div><h5>Prestaciones Agregadas </h5></div>
 
-<div id="detallesEncontrados" name="detallesEncontrados"> <?php echo $detalles; ?> </div>
+<div id="detallesEncontradosVista" name="detallesEncontradosVista"> <?php echo $detalles; ?> </div>
 
 <?php 
 
