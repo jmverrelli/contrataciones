@@ -215,7 +215,7 @@ class ProfesionalesDataBaseLinker
 
     function eliminarProfesional($id){
 
-        $query  = "UPDATE Profesionales SET habilitado = 0 WHERE IdProfesional = $id;";
+        $query  = "UPDATE Profesionales SET habilitado = 0, fecha_deshabilitado = now() WHERE IdProfesional = $id;";
         $response = new stdClass();
         try
         {   
