@@ -35,10 +35,13 @@ class CertificacionesDataBaseLinker
             $row = array();
             $row[] = $certificacion['IdCertificacion'];
             $row[] = $certificacion['Fecha'];
+            $row[] = $certificacion['Nombre'];
             $row[] = $certificacion['IdProfesionales'];
             $row[] = $certificacion['IdHospital'];
             $row[] = $certificacion['FechaInicio'];
             $row[] = $certificacion['FechaFinal'];
+
+            $row[] = '';
             $row[] = '';
             //agrego datos a la fila con clave cell
             $response->rows[$i]['cell'] = $row;
@@ -46,10 +49,12 @@ class CertificacionesDataBaseLinker
 
         $response->userdata['IdCertificacion']= 'IdCertificacion';
         $response->userdata['Fecha']= 'Fecha';
+        $response->userdata['Nombre']= 'FechaFinal';
         $response->userdata['IdProfesionales']= 'IdProfesionales';
         $response->userdata['IdHospital']= 'IdHospital';
         $response->userdata['FechaInicio']= 'FechaInicio';
         $response->userdata['FechaFinal']= 'FechaFinal';
+        $response->userdata['verCert'] = '';
         $response->userdata['myac'] = '';
 
         return json_encode($response);
@@ -79,9 +84,12 @@ class CertificacionesDataBaseLinker
                     cer.IdProfesionales,
                     cer.IdHospital,
                     cer.FechaInicio,
-                    cer.FechaFinal
+                    cer.FechaFinal,
+                    pro.`Apellido y Nombre` as Nombre
                 FROM 
                     Certificaciones cer
+                    LEFT JOIN 
+                    Profesionales pro on (cer.IdProfesionales = pro.IdProfesional)
                 WHERE
                     cer.IdCertificacion IS NOT NULL and cer.habilitado = 1 ".$where." ".$sort;
         
@@ -197,6 +205,61 @@ class CertificacionesDataBaseLinker
 
         return $response;
 
+    }
+
+    function agregarFirmaCertificacion($data){
+
+        $response = new stdClass();
+        if($this->tieneFirma($data['id'])){
+            $response->message = "Esta certificacion ya se encuentra firmada.";
+            $response->ret = false;
+            return $response;
+
+        }
+        $id = $data['id'];
+
+        $query = "UPDATE Certificaciones SET firmado = 1, fecha_firmado = now() WHERE IdCertificacion = $id;";
+
+        try
+        {   
+            $this->dbcert->conectar();
+            $this->dbcert->ejecutarAccion($query);
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Error al conectar con la base de datos", 17052013);
+            $response->message = "Error al ingresar el registro";
+            $response->ret = false;
+            $this->dbcert->desconectar();
+            return $response;   
+        }
+
+        $this->dbcert->desconectar();
+
+        $response->message = "Se ha agregado la firma a la certificacion";
+        $response->ret = true;
+
+        return $response;
+
+    }
+
+    function tieneFirma($id){
+
+        $query = "SELECT firmado from Certificaciones where IdCertificacion = $id;";
+        
+        $this->dbcert->conectar();
+        $this->dbcert->ejecutarQuery($query);
+        $result = $this->dbcert->fetchRow($query);
+        $ret = $result['firmado'];
+        $this->dbcert->desconectar();
+        if($ret == "1"){
+
+            return true;
+        }
+        else{
+
+            return false;
+        }
     }
 
 }

@@ -231,6 +231,28 @@ function detalleCertificacion(id){
         width: "80%",
         buttons:
                 {
+                    "Firmar":function()
+                    {
+                        if(confirm("¿Seguro que desea Firmar la Certificacion?"))
+                        {
+                            $.ajax({
+                                data: {id:id},
+                                type: "POST",
+                                dataType: "json",
+                                url: "presentacion/certificaciones/includes/ajaxFunctions/FirmarCertificacion.php",
+                                success: function(data)
+                                {
+                                    if(data.ret == false){
+                                        alert(data.message);
+                                    }
+                                    else{
+
+                                        alert(data.message);
+                                    }
+                                }
+                            });
+                        }
+                    },
                 	"Imprimir":function()
                     {
                         loadOtherPage(id);
