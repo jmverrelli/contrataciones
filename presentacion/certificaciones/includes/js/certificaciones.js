@@ -1,6 +1,44 @@
 $(document).ready(function(){
 
 
+    $('#certifPorProfesionalbtn').click(function(event){
+
+        event.preventDefault(event);
+
+        var certifPorProfesionalInicio = $('#certifPorProfesionalInicio').val();
+        var certifPorProfesionalFinal = $('#certifPorProfesionalFinal').val();
+
+        if(certifPorProfesionalInicio == ''){
+            alert("Debe ingresar una fecha de inicio.");
+            return;
+        }
+
+        if(certifPorProfesionalFinal == ''){
+            alert("Debe ingresar una fecha de final.");
+            return;
+        }
+
+        $.ajax({
+                data: {certifPorProfesionalInicio : certifPorProfesionalInicio, certifPorProfesionalFinal : certifPorProfesionalFinal},
+                type: "POST",
+                dataType: "json",
+                url: "presentacion/certificaciones/includes/ajaxFunctions/CertifPorProfesional.php",
+                success: function(data)
+                {
+                    if(data.ret == false){
+                        alert(data.message);
+                    }
+                    else{
+
+                        window.location.href = 'presentacion/certificaciones/includes/ajaxFunctions/CertifPorProfesionalExcel.php';
+                    }
+                }
+            });
+
+
+    
+    });
+
     $('#nuevaCertificacion').click(function(event){
         event.preventDefault(event);
         //$("#nuevaCertificacion").off('click');

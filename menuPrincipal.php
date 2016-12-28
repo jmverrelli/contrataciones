@@ -111,6 +111,7 @@
 					<li class="menu__item"><a class="menu__link" href="#">Agregar Profesional</a></li>
 					<li class="menu__item"><a class="menu__link" href="#">Listar Profesionales</a></li>
 					<li class="menu__item"><a class="menu__link" href="#">Vincular Especialidad</a></li>
+					<li class="menu__item"><a class="menu__link" href="#">Listado Certificaciones Prof</a></li>
 				</ul>
 				<!-- Submenu 3 -->
 				<ul data-menu="submenu-3" class="menu__level">
@@ -231,6 +232,10 @@
 
 				case 'Ver Especialidades':
 					$("#loaded_content").load("presentacion/especialidades/includes/forms/verEspecialidades.php");
+				break;
+
+				case 'Listado Certificaciones Prof':
+					$("#loaded_content").load("presentacion/profesionales/includes/forms/certificacionesProf.php");
 				break;
 
 				case 'Todos':
